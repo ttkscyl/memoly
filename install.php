@@ -68,4 +68,15 @@ $conn->exec("
 ");
 echo "<br>5. Topic table created";
 
+// 6. Folders Table
+$conn->exec("DROP TABLE IF EXISTS Folders");
+$conn->exec("
+    CREATE TABLE Folders (
+        folder_id INT(4) AUTO_INCREMENT PRIMARY KEY,
+        folder_name VARCHAR(30) NOT NULL,
+        folder_description VARCHAR(100),
+        deck_id INT(4) UNIQUE
+    )
+");
+echo "<br>6. Folders table created";
 ?>
