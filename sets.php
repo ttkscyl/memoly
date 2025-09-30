@@ -11,6 +11,7 @@ if (!isset($_SESSION["CurrentUser"])) {
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Create Set</title>
     <!-- Validates the input by ensuring that the field is not empty -->
@@ -26,6 +27,9 @@ if (!isset($_SESSION["CurrentUser"])) {
 </head>
 
 <body>
+    <!-- Navbar -->
+    <?php include 'navbar.php'; ?>
+    
     <!-- Create a form for the user to create a set -->
     <form name="createset" action="addsets.php" method="post">
         Name: <input type="text" name="SetName"><br>
@@ -40,4 +44,5 @@ if (!isset($_SESSION["CurrentUser"])) {
 
     <button type="button" onclick="history.back()">Go Back</button>
 </body>
+
 </html>

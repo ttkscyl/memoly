@@ -1,13 +1,14 @@
 <!-- Login Page lets users input their details and post them to the loginprocess -->
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Login</title>
 
     <!-- JavaScript function to validate that both input fields are filled before submitting the form -->
     <script>
         function IsEmpty() {
-            if (document.forms['loginform'].Username.value === "" || 
+            if (document.forms['loginform'].Username.value === "" ||
                 document.forms['loginform'].password.value === "") {
                 alert("Please fill in all fields.");
                 return false; // Prevent form submission if fields are empty
@@ -18,6 +19,10 @@
 </head>
 
 <body>
+
+    <!-- Navbar -->
+    <?php include 'navbar.php'; ?>
+
     <h2>Login</h2>
 
     <!-- PHP code to show error messages from the server -->
@@ -41,4 +46,5 @@
     <br>
     <a href="users.php">Register</a>
 </body>
+
 </html>
