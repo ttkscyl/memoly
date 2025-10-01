@@ -1,9 +1,8 @@
-<!-- Login Page lets users input their details and post them to the loginprocess -->
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Login</title>
+    <title>Memoly | Login</title>
 
     <!-- JavaScript function to validate that both input fields are filled before submitting the form -->
     <script>
@@ -19,9 +18,6 @@
 </head>
 
 <body>
-
-    <!-- Navbar -->
-    <?php include 'navbar.php'; ?>
 
     <h2>Login</h2>
 
@@ -44,7 +40,7 @@
     </form>
 
     <br>
-    <a href="users.php">Register</a>
+    <a href="users.php">Register Here</a>
 </body>
 
 </html>

@@ -6,7 +6,7 @@ include_once("connection.php");
 array_map("htmlspecialchars", $_POST);
 
 // Prepare and run the query
-$stmt = $conn->prepare("SELECT * FROM Users WHERE username = :Username");
+$stmt = $conn->prepare("SELECT * FROM TblUsers WHERE username = :Username");
 $stmt->bindParam(":Username", $_POST['Username']);
 $stmt->execute();
 
@@ -38,4 +38,3 @@ if ($user) {
 }
 
 $conn = null;
-?>

@@ -6,9 +6,6 @@
 </head>
 
 <body>
-    <!-- Navbar -->
-    <?php include 'navbar.php'; ?>
-
     <h1>Sign up</h1>
     <form action="addusers.php" method="post">
 

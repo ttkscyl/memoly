@@ -1,4 +1,5 @@
 <?php
+// Sends HTTP header to the browser to redirect to users.php
 header('Location: users.php');
 
 try {
