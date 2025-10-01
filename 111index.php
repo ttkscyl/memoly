@@ -30,7 +30,7 @@
       <p class="fs-3 fs-md-4 fs-sm-5">A vocabulary learning platform based on Ebbinghaus’s Forgetting Curve for lasting memory.</p>
     </div>
   </section>
-
+  
 </body>
 
 </html>

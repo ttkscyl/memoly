@@ -21,7 +21,7 @@ if ($user) {
         $_SESSION['CurrentUser'] = $user['user_id'];
 
         // Redirect to original page or homepage
-        $backURL = isset($_SESSION['backURL']) ? $_SESSION['backURL'] : "homepage.php";
+        $backURL = isset($_SESSION['backURL']) ? $_SESSION['backURL'] : "index.php";
         unset($_SESSION['backURL']);
 
         header("Location: " . $backURL);
