@@ -10,7 +10,7 @@ try {
     // Set is_teacher (1 if checkbox checked, otherwise 0)
     $is_teacher = isset($_POST["is_teacher"]) ? 1 : 0;
 
-    $stmt = $conn->prepare("INSERT INTO Users (name, username, email, password, is_teacher) 
+    $stmt = $conn->prepare("INSERT INTO TblUsers (name, username, email, password, is_teacher) 
 							VALUES (:name, :username, :email, :password, :is_teacher)");
 
     // Bind parameters

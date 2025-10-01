@@ -2,13 +2,13 @@
 <html>
 
 <head>
-    <title>Sign up</title>
+    <title>Memoly | Sign up</title>
 </head>
 
 <body>
     <!-- Navbar -->
     <?php include 'navbar.php'; ?>
-    
+
     <h1>Sign up</h1>
     <form action="addusers.php" method="post">
 
