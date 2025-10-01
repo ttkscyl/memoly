@@ -2,37 +2,37 @@
 include_once("connection.php");
 
 // 1. Users Table
-$conn->exec("DROP TABLE IF EXISTS Users");
+$conn->exec("DROP TABLE IF EXISTS TblUsers");
 $conn->exec("
-   CREATE TABLE Users (
+   CREATE TABLE TblUsers (
        user_id INT(6) AUTO_INCREMENT PRIMARY KEY,
        name VARCHAR(30),
        username VARCHAR(30) UNIQUE,
        email VARCHAR(30) UNIQUE,
        password VARCHAR(200) NOT NULL,
-       is_teacher BOOLEAN NOT NULL
+       is_teacher BOOLEAN NOT NULL DEFAULT 0
    )
 ");
 echo "<br>1. Users table created";
 
 // 2. Decks Table
-$conn->exec("DROP TABLE IF EXISTS Decks");
+$conn->exec("DROP TABLE IF EXISTS TblDecks");
 $conn->exec("
-   CREATE TABLE Decks (
+   CREATE TABLE TblDecks (
        deck_id INT(4) AUTO_INCREMENT PRIMARY KEY,
        user_id INT(6),
        title VARCHAR(30) NOT NULL,
        description VARCHAR(100),
-       created_at VARCHAR(6) NOT NULL,
+       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
        topic_id INT(3)
    )
 ");
 echo "<br>2. Decks table created";
 
 // 3. Cards Table
-$conn->exec("DROP TABLE IF EXISTS Cards");
+$conn->exec("DROP TABLE IF EXISTS TblCards");
 $conn->exec("
-   CREATE TABLE Cards (
+   CREATE TABLE TblCards (
        card_id INT(20) AUTO_INCREMENT PRIMARY KEY,
        deck_id INT(4),
        front VARCHAR(100),
@@ -44,9 +44,9 @@ $conn->exec("
 echo "<br>3. Cards table created";
 
 // 4. StudySession Table
-$conn->exec("DROP TABLE IF EXISTS StudySession");
+$conn->exec("DROP TABLE IF EXISTS TblStudySession");
 $conn->exec("
-   CREATE TABLE StudySession (
+   CREATE TABLE TblStudySession (
        session_id INT(4) AUTO_INCREMENT PRIMARY KEY,
        user_id INT(6),
        deck_id INT(4),
@@ -59,9 +59,9 @@ $conn->exec("
 echo "<br>4. StudySession table created";
 
 // 5. Topic Table
-$conn->exec("DROP TABLE IF EXISTS Topic");
+$conn->exec("DROP TABLE IF EXISTS TblTopic");
 $conn->exec("
-   CREATE TABLE Topic (
+   CREATE TABLE TblTopic (
        topic_id INT(3) AUTO_INCREMENT PRIMARY KEY,
        topic_name VARCHAR(200)
    )
@@ -69,9 +69,9 @@ $conn->exec("
 echo "<br>5. Topic table created";
 
 // 6. Folders Table
-$conn->exec("DROP TABLE IF EXISTS Folders");
+$conn->exec("DROP TABLE IF EXISTS TblFolders");
 $conn->exec("
-    CREATE TABLE Folders (
+    CREATE TABLE TblFolders (
         folder_id INT(4) AUTO_INCREMENT PRIMARY KEY,
         folder_name VARCHAR(30) NOT NULL,
         folder_description VARCHAR(100),
