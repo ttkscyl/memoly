@@ -7,6 +7,7 @@ if (!isset($_SESSION["CurrentUser"])) {
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Memoly | Create decks</title>
     <script>
@@ -19,6 +20,7 @@ if (!isset($_SESSION["CurrentUser"])) {
         }
     </script>
 </head>
+
 <body>
     <!-- Create a form for the user to create a deck -->
     <form name="createset" action="adddecks.php" method="post">
@@ -34,4 +36,5 @@ if (!isset($_SESSION["CurrentUser"])) {
 
     <button onclick="history.back()">Go Back</button>
 </body>
+
 </html>

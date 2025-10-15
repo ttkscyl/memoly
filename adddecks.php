@@ -4,7 +4,7 @@ session_start();
 try {
     include_once('connection.php');
 
-    // Determine topic (optional)
+    // Determine topic
     $topicId = !empty($_POST["TopicID"]) ? $_POST["TopicID"] : null;
 
     // Insert new deck into TblDecks

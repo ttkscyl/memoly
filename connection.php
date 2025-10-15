@@ -14,7 +14,7 @@ try {
 catch (PDOException $e) {
     echo "Connection failed: " . $e->getMessage();
 }
-
+ 
 # /Applications/XAMPP/xamppfiles/bin/mysql -u root
 # MacOS login to databse
 ?>
