@@ -27,5 +27,5 @@ try {
     echo "Database Error: " . $e->getMessage();
 }
 
-$conn = null;
+$conn = null; 
 ?>

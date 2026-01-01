@@ -11,7 +11,7 @@ $conn->exec("
        email VARCHAR(30) UNIQUE,
        password VARCHAR(200) NOT NULL,
        is_teacher BOOLEAN NOT NULL DEFAULT 0
-   )a
+   )
 ");
 echo "<br>1. Users table created";
 
