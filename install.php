@@ -1,142 +1,81 @@
 <?php
-// Server login
-$servername = 'localhost';
-$username   = 'root';
-$password   = '';
+include_once("connection.php");
 
-try {
-    // Login to server and create database if not already exists
-    $conn = new PDO("mysql:host=$servername", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// 1. Users Table
+$conn->exec("DROP TABLE IF EXISTS TblUsers");
+$conn->exec("
+   CREATE TABLE TblUsers (
+       user_id INT(6) AUTO_INCREMENT PRIMARY KEY,
+       name VARCHAR(30),
+       username VARCHAR(30) UNIQUE,
+       email VARCHAR(30) UNIQUE,
+       password VARCHAR(200) NOT NULL,
+       is_teacher BOOLEAN NOT NULL DEFAULT 0
+   )
+");
+echo "<br>1. Users table created";
 
-    $sql = "CREATE DATABASE IF NOT EXISTS Flashcards";
-    $conn->exec($sql);
+// 2. Decks Table
+$conn->exec("DROP TABLE IF EXISTS TblDecks");
+$conn->exec("
+   CREATE TABLE TblDecks (
+       deck_id INT(4) AUTO_INCREMENT PRIMARY KEY,
+       user_id INT(6),
+       title VARCHAR(30) NOT NULL,
+       description VARCHAR(100),
+       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+       topic_id INT(3)
+   )
+");
+echo "<br>2. Decks table created";
 
-    $sql = "USE Flashcards";
-    $conn->exec($sql);
+// 3. Cards Table
+$conn->exec("DROP TABLE IF EXISTS TblCards");
+$conn->exec("
+   CREATE TABLE TblCards (
+       card_id INT(20) AUTO_INCREMENT PRIMARY KEY,
+       deck_id INT(4),
+       front VARCHAR(100),
+       back VARCHAR(1000) NOT NULL,
+       pic VARCHAR(1000),
+       topic_id INT(3)
+   )
+");
+echo "<br>3. Cards table created";
 
-    echo "DB created successfully<br>";
+// 4. StudySession Table
+$conn->exec("DROP TABLE IF EXISTS TblStudySession");
+$conn->exec("
+   CREATE TABLE TblStudySession (
+       session_id INT(4) AUTO_INCREMENT PRIMARY KEY,
+       user_id INT(6),
+       deck_id INT(4),
+       starttime DATETIME,
+       endtime DATETIME,
+       teacher_set BOOLEAN,
+       score INT(3)
+   )
+");
+echo "<br>4. StudySession table created";
 
-    /* =========================
-       CREATE USERS TABLE
-    ========================== */
-    $stmt = $conn->prepare("
-        DROP TABLE IF EXISTS TblUsers;
-        CREATE TABLE TblUsers (
-            UserID INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            Email VARCHAR(50) NOT NULL,
-            Username VARCHAR(120) NOT NULL,
-            Password VARCHAR(200) NOT NULL
-        )
-    ");
-    $stmt->execute();
-    $stmt->closeCursor();
+// 5. Topic Table
+$conn->exec("DROP TABLE IF EXISTS TblTopic");
+$conn->exec("
+   CREATE TABLE TblTopic (
+       topic_id INT(3) AUTO_INCREMENT PRIMARY KEY,
+       topic_name VARCHAR(200)
+   )
+");
+echo "<br>5. Topic table created";
 
-    /* =========================
-       CREATE SETS TABLE
-    ========================== */
-    $stmt2 = $conn->prepare("
-        DROP TABLE IF EXISTS TblSets;
-        CREATE TABLE TblSets (
-            SetID INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            SetName VARCHAR(50) NOT NULL,
-            UserID INT(6) NOT NULL,
-            Public INT(1) NOT NULL DEFAULT 0,
-            SetDescription VARCHAR(100) NOT NULL
-        )
-    ");
-    $stmt2->execute();
-    $stmt2->closeCursor();
-
-    /* =========================
-       USER STUDIES TABLE
-    ========================== */
-    $stmt7 = $conn->prepare("
-        DROP TABLE IF EXISTS TblUserStudies;
-        CREATE TABLE TblUserStudies (
-            UserID INT(6) NOT NULL,
-            SetID INT(10) NOT NULL,
-            Visits INT(10) DEFAULT 0,
-            TimeStart DATETIME,
-            TimeFinish DATETIME,
-            PRIMARY KEY (UserID, SetID)
-        )
-    ");
-    $stmt7->execute();
-    $stmt7->closeCursor();
-
-    /* =========================
-       TEST RESULTS TABLE
-    ========================== */
-    $stmt7 = $conn->prepare("
-        DROP TABLE IF EXISTS TblTests;
-        CREATE TABLE TblTests (
-            UserID INT(6) NOT NULL,
-            SetID INT(10) NOT NULL,
-            Score INT(10) DEFAULT 0,
-            Date DATETIME,
-            PRIMARY KEY (UserID, SetID, Date)
-        )
-    ");
-    $stmt7->execute();
-    $stmt7->closeCursor();
-
-    /* =========================
-       INSERT TEST USERS
-    ========================== */
-    $hashed_password = password_hash("password", PASSWORD_DEFAULT);
-
-    $stmt9 = $conn->prepare("
-        INSERT INTO TblUsers (UserID, Username, Email, Password) VALUES
-        (NULL, 'Focus.l', 'lamitiapont.m@oundleschool.org.uk', :pword),
-        (NULL, 'Liv.X', 'liv.xu@gmail.com', :pword)
-    ");
-    $stmt9->bindParam(':pword', $hashed_password);
-    $stmt9->execute();
-    $stmt9->closeCursor();
-
-    /* =========================
-       INSERT TEST SETS
-    ========================== */
-    $stmt10 = $conn->prepare("
-        INSERT INTO TblSets (SetID, SetName, UserID, Public, SetDescription) VALUES
-        (NULL, 'Primary Storage', 1, 1, 'RAM ROM etc'),
-        (NULL, 'Cell Structures', 1, 1, 'Eukaryotes')
-    ");
-    $stmt10->execute();
-    $stmt10->closeCursor();
-
-    /* =========================
-       INSERT FLASHCARDS
-    ========================== */
-    $stmt12 = $conn->prepare("
-        INSERT INTO TblCards (CardID, Term, Definition) VALUES
-        (NULL, 'MITOCHONDRIA', 'PRODUCES ATP'),
-        (NULL, 'Vacuole', 'A HOLE IN PLANT CELL'),
-        (NULL, 'Cell wall', 'MADE OF CELLULOSE'),
-        (NULL, 'Golgi Body', 'PACKAGE PROTEIN'),
-        (NULL, 'Lysosome', 'CONTAINS LYSOZYMES')
-    ");
-    $stmt12->execute();
-    $stmt12->closeCursor();
-
-    /* =========================
-       LINK CARDS TO SETS
-    ========================== */
-    $stmt13 = $conn->prepare("
-        INSERT INTO TblSetContent (SetID, CardID) VALUES
-        (2, 1),
-        (2, 2),
-        (2, 3),
-        (2, 4),
-        (2, 5)
-    ");
-    $stmt13->execute();
-    $stmt13->closeCursor();
-
-} catch (PDOException $e) {
-    echo "Error:<br>" . $e->getMessage();
-}
-
-$conn = null;
-?>
+// 6. Folders Table
+$conn->exec("DROP TABLE IF EXISTS TblFolders");
+$conn->exec("
+    CREATE TABLE TblFolders (
+        folder_id INT(4) AUTO_INCREMENT PRIMARY KEY,
+        folder_name VARCHAR(30) NOT NULL,
+        folder_description VARCHAR(100),
+        deck_id INT(4) UNIQUE
+    )
+");
+echo "<br>6. Folders table created";
