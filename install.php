@@ -123,5 +123,5 @@ $conn->exec("
 ");
 echo "<br>6. TblStudySessions created";
 
-echo "<br><br><strong>✅ Installation complete — all 6 tables created successfully.</strong>";
+echo "<br><br><strong>Installation complete — all 6 tables created successfully.</strong>";
 ?>
