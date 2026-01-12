@@ -1,3 +1,5 @@
+<?php include_once("navbar.php"); ?>
+
 <?php
 // test.php
 // Simple testing mode for a flashcard deck

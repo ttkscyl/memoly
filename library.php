@@ -1,3 +1,5 @@
+<?php include_once("navbar.php"); ?>
+
 <?php
 // library.php
 // Displays all folders and the sets (decks) within them for the logged-in user

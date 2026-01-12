@@ -1,3 +1,5 @@
+<?php include_once("navbar.php"); ?>
+
 <?php
 // Start session to identify logged-in user
 session_start();
