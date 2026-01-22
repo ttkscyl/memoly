@@ -1,7 +1,4 @@
 <?php
-// install.php
-// Creates the database tables for the Flashcards project (6-table schema)
-
 include_once("connection.php");
 
 // Ensure PDO throws errors automatically

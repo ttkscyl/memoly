@@ -1,9 +1,4 @@
 <?php
-/*
-    addsets.php
-    Inserts a new set into TblDecks and links it to a folder.
-*/
-
 session_start();
 
 // Ensure user is logged in

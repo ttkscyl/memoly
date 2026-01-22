@@ -12,10 +12,8 @@ if (!isset($_SESSION['CurrentUser'])) {
 
 include_once("connection.php");
 
-/*
-    Get decks (sets) that belong to the logged-in user.
-    This ensures the user can only add cards to their own decks.
-*/
+//Get decks (sets) that belong to the logged-in user.
+//This ensures the user can only add cards to their own decks.
 $stmt = $conn->prepare(
     "SELECT deck_id, title
      FROM TblDecks

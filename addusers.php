@@ -1,9 +1,4 @@
 <?php
-/*
-    addusers.php
-    Handles user registration and inserts a new user into TblUsers.
-*/
-
 try {
     // Connect to the database
     include_once('connection.php');

@@ -1,7 +1,4 @@
 <?php
-// insert_test_data.php
-// Inserts test data for the Flashcards project
-
 include_once("connection.php");
 
 // Ensure errors show
