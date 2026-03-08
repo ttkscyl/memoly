@@ -1,6 +1,6 @@
 <?php
 require_once "connection.php";
-session_start();  // Start session so we can access session variables
+session_start();  // Start session
 
 // Ensure that only logged-in users can access the library page
 if (!isset($_SESSION['UserID'])) {
@@ -8,7 +8,7 @@ if (!isset($_SESSION['UserID'])) {
     exit();
 }
 
-$userid = $_SESSION['UserID'];  // Retrieve the current user's ID
+$userid = $_SESSION['UserID'];  // Retrieve current user's ID
 
 // Retrieve folders that belong to the logged-in user
 $stmt = $conn->prepare("SELECT * FROM Folders WHERE UserID = ?");
@@ -75,6 +75,20 @@ body {
     color: black;
 }
 
+/* Folder box style */
+.folder {
+    padding: 10px 20px;
+    border: 2px solid black;
+    text-decoration: none;
+    color: black;
+}
+
+/* Highlight the selected folder */
+.folder.selected {
+    background-color: #cfe2ff;
+    border: 3px solid #2b6cb0;
+}
+
 </style>
 
 </head>
@@ -86,11 +100,19 @@ body {
 <!-- Display folders in a centered row -->
 <div class="folder-container">
 
-<?php foreach ($folders as $folder) { ?>
+<?php foreach ($folders as $folder) { 
 
-<a class="folder"
+    // Check if this folder is the one currently selected
+    $class = "folder";
+    if ($selectedFolder == $folder['FolderID']) {
+        $class .= " selected";
+    }
+
+?>
+
+<a class="<?php echo $class; ?>"
    href="library.php?folderid=<?php echo $folder['FolderID']; ?>">
-   
+
    <?php echo $folder['FolderName']; ?>
 
 </a>
