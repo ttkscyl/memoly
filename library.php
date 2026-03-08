@@ -1,0 +1,127 @@
+<?php
+require_once "connection.php";
+session_start();  // Start session so we can access session variables
+
+// Ensure that only logged-in users can access the library page
+if (!isset($_SESSION['UserID'])) {
+    header("Location: login.html");
+    exit();
+}
+
+$userid = $_SESSION['UserID'];  // Retrieve the current user's ID
+
+// Retrieve folders that belong to the logged-in user
+$stmt = $conn->prepare("SELECT * FROM Folders WHERE UserID = ?");
+$stmt->execute([$userid]);
+$folders = $stmt->fetchAll();
+
+$selectedFolder = null;
+$sets = [];
+
+if (isset($_GET['folderid'])) {
+
+    $selectedFolder = $_GET['folderid'];
+
+    // Retrieve sets in the selected folder
+    $stmt = $conn->prepare("SELECT * FROM Sets WHERE FolderID = ?");
+    $stmt->execute([$selectedFolder]);
+    $sets = $stmt->fetchAll();
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Library</title>
+
+<style>
+
+/* Center the whole page content */
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+/* Container for folders */
+.folder-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 30px;
+}
+
+/* Folder box style */
+.folder {
+    padding: 10px 20px;
+    border: 2px solid black;
+    text-decoration: none;
+    color: black;
+}
+
+/* Container for sets */
+.set-container {
+    margin-top: 20px;
+}
+
+/* Set box style */
+.set {
+    display: block;
+    padding: 8px 15px;
+    border: 2px solid black;
+    margin: 10px auto;
+    width: 120px;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>Your Library</h2>
+
+<!-- Display folders in a centered row -->
+<div class="folder-container">
+
+<?php foreach ($folders as $folder) { ?>
+
+<a class="folder"
+   href="library.php?folderid=<?php echo $folder['FolderID']; ?>">
+   
+   <?php echo $folder['FolderName']; ?>
+
+</a>
+
+<?php } ?>
+
+</div>
+
+
+<!-- Display sets below the selected folder -->
+
+<?php if ($selectedFolder) { ?>
+
+<div class="set-container">
+
+<h3>Sets in this folder</h3>
+
+<?php foreach ($sets as $set) { ?>
+
+<a class="set"
+   href="flashcards.php?setid=<?php echo $set['SetID']; ?>">
+
+   <?php echo $set['SetName']; ?>
+
+</a>
+
+<?php } ?>
+
+</div>
+
+<?php } ?>
+
+</body>
+</html>
