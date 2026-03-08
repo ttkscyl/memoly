@@ -133,7 +133,7 @@ body {
 <?php foreach ($sets as $set) { ?>
 
 <a class="set"
-   href="flashcards.php?setid=<?php echo $set['SetID']; ?>">
+   href="editflashcards.php?setid=<?php echo $set['SetID']; ?>">
 
    <?php echo $set['SetName']; ?>
 
