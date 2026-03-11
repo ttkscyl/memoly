@@ -1,6 +1,7 @@
 <?php
 
 require_once "connection.php";
+require_once "navbar.php";
 session_start();  // Start session to store login information
 
 $username = $_POST['username'];

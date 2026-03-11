@@ -1,9 +1,13 @@
+<?php require_once "navbar.php"; ?>
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Sign Up</title>
 </head>
 <body>
+    
+    <br>
 
     <h2>Create an Account</h2>
 

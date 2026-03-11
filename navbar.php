@@ -1,3 +1,7 @@
+<?php
+session_start(); // Start session so we can check login status
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,11 +26,13 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container-fluid">
+
             <a class="navbar-brand" href="index.php">
-                <img src="pictures/icon.png" alt="company logo" style="width:45px;" class="rounded-pill">
+                <img src="mypictures/icon.jpg" alt="company logo" style="width:45px;" class="rounded-pill">
                 <span><b>&nbsp;&nbsp; Memoly</b></span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -43,11 +49,25 @@
 
             <!-- Right side -->
             <div class="d-flex align-items-center" id="user-section">
-                <a href="login.php" class="nav-link">Login in</a>
+
+                <?php if (isset($_SESSION['UserID'])) { ?>
+
+                    <!-- If user is logged in show logout -->
+                    <a href="logout.php" class="nav-link">Logout</a>
+
+                <?php } else { ?>
+
+                    <!-- If user is not logged in show login -->
+                    <a href="login.php" class="nav-link">Login</a>
+
+                <?php } ?>
+
             </div>
 
         </div>
     </nav>
-</body>
 
+    <br>
+
+</body>
 </html>

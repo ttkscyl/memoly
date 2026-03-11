@@ -1,3 +1,5 @@
+<?php require_once "navbar.php"; ?>
+
 <?php
 session_start();
 

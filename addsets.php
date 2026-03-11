@@ -1,6 +1,7 @@
 <?php
 
 require_once "connection.php";
+require_once "navbar.php";
 session_start();  // Start session to access UserID
 
 // Ensure only logged-in users can create sets

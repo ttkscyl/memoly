@@ -1,5 +1,6 @@
 <?php
 require_once "connection.php";
+require_once "navbar.php";
 session_start();  // Start session
 
 // Ensure that only logged-in users can access the library page
@@ -120,28 +121,39 @@ body {
 <?php } ?>
 
 </div>
+<br>
 
 
-<!-- Display sets below the selected folder -->
+<!-- Display sets if a folder is selected -->
 
 <?php if ($selectedFolder) { ?>
-
-<div class="set-container">
 
 <h3>Sets in this folder</h3>
 
 <?php foreach ($sets as $set) { ?>
 
-<a class="set"
-   href="editflashcards.php?setid=<?php echo $set['SetID']; ?>">
+<div style="display:flex; justify-content:center; align-items:center; gap:20px; margin:10px;">
 
-   <?php echo $set['SetName']; ?>
+    <!-- Set name -->
+    <div style="border:2px solid black; padding:10px; width:150px; text-align:center;">
+        <?php echo $set['SetName']; ?>
+    </div>
 
-</a>
+    <!-- Learn button -->
+    <a href="learn.php?setid=<?php echo $set['SetID']; ?>"
+       style="border:2px solid black; padding:10px; width:100px; text-align:center; text-decoration:none;">
+       Learn
+    </a>
 
-<?php } ?>
+    <!-- Test button -->
+    <a href="test.php?setid=<?php echo $set['SetID']; ?>"
+       style="border:2px solid black; padding:10px; width:100px; text-align:center; text-decoration:none;">
+       Test
+    </a>
 
 </div>
+
+<?php } ?>
 
 <?php } ?>
 

@@ -1,6 +1,7 @@
 <?php
 
 require_once "connection.php";
+require_once "navbar.php";
 
 // Get form data
 $username = $_POST['username'];

@@ -14,7 +14,7 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // For testing during development, comment after development complete
-    echo "Connected successfully!"; 
+    //echo "Connected successfully!"; 
 
 } catch (PDOException $e) {
     // Display full error message while developing to help debugging

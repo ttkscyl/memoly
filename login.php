@@ -1,3 +1,5 @@
+<?php require_once "navbar.php"; ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,6 +7,8 @@
 </head>
 <body>
 
+    <br>
+    
     <h2>Login</h2>
 
     <!-- POST is used because login details should not appear in the URL. -->

@@ -1,6 +1,7 @@
 <?php
 
 require_once "connection.php";
+require_once "navbar.php";
 session_start();
 
 // Ensure user is logged in

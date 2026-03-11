@@ -1,5 +1,6 @@
 <?php
 require_once "connection.php";
+require_once "navbar.php"; 
 session_start();
 
 if (!isset($_SESSION['UserID'])) {

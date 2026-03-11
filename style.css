@@ -4,7 +4,21 @@ body {
     padding-top: 60px; /* Adjust based on navbar height */
   }
 
+/* Navbar */
+.navbar {
+    background-color: #b8bdc1 !important; 
+    font-family: 'Oxanium', sans-serif;
+}
   
+.navbar .nav-link {
+    color: #333 !important; 
+    font-family: 'Oxanium', sans-serif;
+}
+  
+.navbar .nav-link:hover {
+    color: #007bff !important;
+}
+
 /* Main Section */
 .hero {
     background-image: url('pictures/dream.webp');
@@ -43,19 +57,4 @@ body {
 
 .hero p {
     margin-top: 20px;
-}
-
-/* Navbar */
-.navbar {
-    background-color: #b8bdc1 !important; 
-    font-family: 'Oxanium', sans-serif;
-}
-  
-.navbar .nav-link {
-    color: #333 !important; 
-    font-family: 'Oxanium', sans-serif;
-}
-  
-.navbar .nav-link:hover {
-    color: #007bff !important;
 }
