@@ -135,10 +135,11 @@ body {
 <div style="display:flex; justify-content:center; align-items:center; gap:20px; margin:10px;">
 
     <!-- Set name -->
-    <div style="border:2px solid black; padding:10px; width:150px; text-align:center;">
+    <a href="editflashcards.php?setid=<?php echo $set['SetID']; ?>"
+       style="border:2px solid black; padding:10px; width:200px; text-align:center; text-decoration:none;">
         <?php echo $set['SetName']; ?>
-    </div>
-
+    </a>
+    
     <!-- Learn button -->
     <a href="learn.php?setid=<?php echo $set['SetID']; ?>"
        style="border:2px solid black; padding:10px; width:100px; text-align:center; text-decoration:none;">
