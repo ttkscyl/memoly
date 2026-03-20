@@ -96,7 +96,7 @@ showCard();
 function showCard(){
 
     if(cards.length == 0){
-        document.getElementById("flashcard").innerHTML = "No flashcards";
+        document.getElementById("flashcard").innerHTML = "No flashcards in ";
         return;
     }
 
@@ -115,18 +115,19 @@ function flipCard(){
 
 // Next card
 function nextCard(){
-    if(index < cards.length - 1){
-        index++;
-    }
+    if(cards.length == 0) return;
+    // Move to next card, loop back to start if at the end
+    index = (index + 1) % cards.length;
+    // Always show term first when switching cards
     showingTerm = true;
     showCard();
 }
 
 // Previous card
 function prevCard(){
-    if(index > 0){
-        index--;
-    }
+    if(cards.length == 0) return;
+    // Move to previous card, loop to last if at start
+    index = (index - 1 + cards.length) % cards.length;
     showingTerm = true;
     showCard();
 }
